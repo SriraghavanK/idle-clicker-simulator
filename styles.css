@@ -1,92 +1,89 @@
 body {
   font-family: Arial, sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
   background-color: #f0f0f0;
-  text-align: center;
-  padding: 20px;
 }
 
 #game {
-  max-width: 800px;
-  margin: 0 auto;
-  background-color: #fff;
+  width: 90%;
+  max-width: 600px;
+  background: white;
   padding: 20px;
-  border-radius: 10px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  text-align: center;
 }
 
 .game-title {
-  color: #333;
+  margin: 0;
+  font-size: 2em;
 }
 
 .game-info {
-  font-size: 18px;
-  color: #666;
+  font-size: 1.2em;
+}
+
+.points-button {
+  font-size: 1.2em;
+  border: none;
+  background: none;
+  cursor: default;
 }
 
 #progress {
-  height: 20px;
-  background-color: #ddd;
-  border-radius: 10px;
+  width: 100%;
+  background: #e0e0e0;
+  border-radius: 5px;
   margin: 20px 0;
-  overflow: hidden;
 }
 
 #progress-bar {
-  height: 100%;
-  background-color: #4caf50;
-  width: 0; /* Start with 0 width */
+  width: 0;
+  height: 20px;
+  background: #76c7c0;
+  border-radius: 5px;
+  transition: width 0.3s;
 }
 
 .click-button {
+  font-size: 1.5em;
   padding: 10px 20px;
-  font-size: 18px;
-  background-color: #4caf50;
-  color: #fff;
-  border: none;
-  border-radius: 5px;
+  margin: 20px 0;
   cursor: pointer;
-  transition: background-color 0.3s ease;
-  margin-bottom: 10px;
-}
-
-.click-button:hover {
-  background-color: #45a049;
+  background: #76c7c0;
+  border: none;
+  color: white;
+  border-radius: 5px;
 }
 
 .navbar {
   display: flex;
   justify-content: space-around;
   margin-bottom: 20px;
+  flex-wrap: wrap;
 }
 
 .navbar-button {
-  padding: 10px 20px;
-  font-size: 16px;
-  color: #fff;
+  flex: 1;
+  padding: 10px;
+  cursor: pointer;
+  background: #e0e0e0;
   border: none;
   border-radius: 5px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
+  margin: 5px;
 }
 
-.navbar-button {
-  background-color: #da0b0b;
-}
-.navbar-button#ultraRebirthsButton {
-  background-color: #ff69b4;
-}
-
-.navbar-button#rebirthsButton {
-  background-color: rgb(66, 13, 189); /* Pink color for rebirth button */
-}
-
-.navbar-button#runesButton {
-  background-color: #4caf50; /* Green color for runes button */
+.navbar-button.active {
+  background: #76c7c0;
+  color: white;
 }
 
 .tab {
   display: none;
-  margin-bottom: 20px;
 }
 
 .tab.active {
@@ -94,77 +91,30 @@ body {
 }
 
 .tab-title {
-  color: #333;
-  margin-bottom: 10px;
+  font-size: 1.5em;
+  margin-bottom: 20px;
 }
 
 .scrollable {
   max-height: 200px;
   overflow-y: auto;
-  padding-right: 20px; /* Adjust for scrollbar width */
 }
 
-.multiplier {
-  display: block;
-  padding: 10px 20px;
-  margin-bottom: 10px;
-  font-size: 16px;
-  background-color: #da0b0b;
-  color: white;
-  border: none;
-  border-radius: 5px;
+.multiplier, .rebirth, .ultra-rebirth, .draw-rune {
+  width: 100%;
+  padding: 10px;
+  margin: 5px 0;
   cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-.rebirth {
-  display: block;
-  padding: 10px 20px;
-  margin-bottom: 10px;
-  font-size: 16px;
-  background-color: rgb(66, 13, 189); /* Pink background */
-  color: white; /* White text color */
   border: none;
+  background: #e0e0e0;
   border-radius: 5px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-.ultra-rebirth {
-  display: block;
-  padding: 10px 20px;
-  margin-bottom: 10px;
-  font-size: 16px;
-  background-color: #ff69b4; /* Pink background */
-  color: white; /* White text color */
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-.draw-rune {
-  padding: 10px 20px;
-  margin-bottom: 10px;
-  font-size: 16px;
-  background-color: #4caf50;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-.draw-rune:hover {
-  background-color: #45a049;
 }
 
 .rune {
-  display: block;
-  padding: 10px 20px;
-  margin-bottom: 10px;
-  font-size: 16px;
-  background-color: #333;
-  color: white;
-  border: none;
+  margin: 5px 0;
+  padding: 10px;
+  background: #f9f9f9;
+  border: 1px solid #e0e0e0;
   border-radius: 5px;
 }
+
