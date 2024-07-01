@@ -16,146 +16,75 @@ const runeInventory = document.getElementById("runeInventory");
 const progressBar = document.getElementById("progress-bar");
 
 function updatePoints() {
-  pointsButton.textContent = points;
+  pointsButton.textContent = points.toLocaleString();
   updateProgressBar();
 }
 
 function updateProgressBar() {
-  const progress = Math.min((points / (points + 1)) * 100, 100);
-  progressBar.style.width = progress + "%";
+  const progress = Math.min(points / 1000000, 1) * 100; // Calculate progress as a percentage
+  progressBar.style.width = progress + '%';
 }
 
-function click() {
+clickButton.addEventListener('click', () => {
   points += multiplier * rebirthMultiplier * ultraRebirthMultiplier * runeBoost;
   updatePoints();
-}
+});
 
-clickButton.addEventListener("click", click);
-
-document.querySelectorAll(".navbar-button").forEach((button) => {
-  button.addEventListener("click", () => {
-    document
-      .querySelectorAll(".navbar-button")
-      .forEach((btn) => btn.classList.remove("active"));
-    button.classList.add("active");
-
-    document
-      .querySelectorAll(".tab")
-      .forEach((tab) => tab.classList.remove("active"));
-    document.getElementById(button.dataset.tab).classList.add("active");
+document.querySelectorAll('.navbar-button').forEach(button => {
+  button.addEventListener('click', () => {
+    document.querySelectorAll('.navbar-button').forEach(btn => btn.classList.remove('active'));
+    document.querySelectorAll('.tab').forEach(tab => tab.classList.remove('active'));
+    button.classList.add('active');
+    document.getElementById(button.getAttribute('data-tab')).classList.add('active');
   });
 });
 
-document.querySelectorAll(".multiplier").forEach((button) => {
-  button.addEventListener("click", () => {
-    const cost = parseInt(button.dataset.cost, 10);
-    const newMultiplier = parseInt(button.dataset.multiplier, 10);
+document.querySelectorAll('.multiplier').forEach(button => {
+  button.addEventListener('click', () => {
+    const cost = parseInt(button.getAttribute('data-cost'));
+    const value = parseInt(button.getAttribute('data-multiplier'));
     if (points >= cost) {
       points -= cost;
-      multiplier = newMultiplier;
+      multiplier *= value;
       updatePoints();
     }
   });
 });
 
-document.querySelectorAll(".rebirth").forEach((button) => {
-  button.addEventListener("click", () => {
-    const cost = parseInt(button.dataset.cost, 10);
+document.querySelectorAll('.rebirth').forEach(button => {
+  button.addEventListener('click', () => {
+    const cost = parseInt(button.getAttribute('data-cost'));
     if (points >= cost) {
       points -= cost;
-      rebirthMultiplier = parseInt(button.textContent.split("x")[1], 10);
+      rebirthMultiplier *= parseInt(button.textContent.match(/Multiplier x(\d+)/)[1]);
       updatePoints();
     }
   });
 });
 
-document.querySelectorAll(".ultra-rebirth").forEach((button) => {
-  button.addEventListener("click", () => {
-    const cost = parseInt(button.dataset.cost, 10);
+document.querySelectorAll('.ultra-rebirth').forEach(button => {
+  button.addEventListener('click', () => {
+    const cost = parseInt(button.getAttribute('data-cost'));
     if (points >= cost) {
       points -= cost;
-      ultraRebirthMultiplier = parseInt(button.textContent.split("x")[1], 10);
+      ultraRebirthMultiplier *= parseInt(button.textContent.match(/Multiplier x(\d+)/)[1]);
       updatePoints();
     }
   });
 });
 
-document.getElementById("drawRune").addEventListener("click", () => {
-  const drawCost = 10000;
-  if (points >= drawCost) {
-    points -= drawCost;
+document.getElementById('drawRune').addEventListener('click', () => {
+  if (points >= 10000) {
+    points -= 10000;
     runeCount++;
-    updatePoints();
+    runeBoost *= 1.1; // Adjust rune boost as needed
     runeCountElement.textContent = runeCount;
-
-    const rune = drawRune();
-    runeBoost *= rune.boost;
-
-    // Clear previous rune display
-    while (runeInventory.firstChild) {
-      runeInventory.removeChild(runeInventory.firstChild);
-    }
-
-    const runeElement = document.createElement("div");
-    runeElement.className = "rune";
-    runeElement.textContent = `${rune.name} Rune (+${(
-      rune.boost * 100 -
-      100
-    ).toFixed(2)}% Boost)`;
+    updatePoints();
+    const runeElement = document.createElement('div');
+    runeElement.classList.add('rune');
+    runeElement.textContent = `Rune ${runeCount} - Boost x${(runeBoost).toFixed(2)}`;
     runeInventory.appendChild(runeElement);
   }
 });
 
-function drawRune() {
-  const runes = [
-    { name: "Common", boost: 1.05, chance: 50 },
-    { name: "Uncommon", boost: 1.1, chance: 30 },
-    { name: "Rare", boost: 1.15, chance: 15 },
-    { name: "Epic", boost: 1.2, chance: 4 },
-    { name: "Legendary", boost: 1.25, chance: 1 },
-  ];
-
-  const random = Math.random() * 100;
-  let cumulativeChance = 0;
-  for (const rune of runes) {
-    cumulativeChance += rune.chance;
-    if (random < cumulativeChance) {
-      return rune;
-    }
-  }
-  return runes[0]; // Default to Common if something goes wrong
-}
-
-function formatNumber(number) {
-  if (number >= 1e6) {
-    return (number / 1e6).toFixed(1) + "M";
-  } else if (number >= 1e3) {
-    return (number / 1e3).toFixed(1) + "K";
-  } else {
-    return number.toString();
-  }
-}
-
-function updateButtons() {
-  document.querySelectorAll(".multiplier").forEach((button) => {
-    button.innerHTML = `Multiplier x${
-      button.dataset.multiplier
-    } (Cost: ${formatNumber(button.dataset.cost)} points)`;
-  });
-
-  document.querySelectorAll(".rebirth").forEach((button) => {
-    button.innerHTML = `Rebirth (Cost: ${formatNumber(
-      button.dataset.cost
-    )} points) - Multiplier x${button.textContent.split("x")[1]}`;
-  });
-
-  document.querySelectorAll(".ultra-rebirth").forEach((button) => {
-    button.innerHTML = `Ultra Rebirth (Cost: ${formatNumber(
-      button.dataset.cost
-    )} points) - Multiplier x${button.textContent.split("x")[1]}`;
-  });
-}
-
-updateButtons();
 updatePoints();
-updateProgressBar();
