@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Idle Clicker Game</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div id="game">
+      <h1 class="game-title">Idle Clicker Game</h1>
+      <p class="game-info">
+        Points: <button id="pointsButton" class="points-button">0</button>
+      </p>
+      <div id="progress">
+        <div id="progress-bar"></div>
+      </div>
+      <button id="clickButton" class="click-button">Click me! 🔹</button>
+
+      <!-- Navbar -->
+      <div id="navbar" class="navbar">
+        <button
+          id="multipliersButton"
+          class="navbar-button active"
+          data-tab="multipliersTab"
+        >
+          Multipliers (1 to 1M)
+        </button>
+        <button
+          id="rebirthsButton"
+          class="navbar-button"
+          data-tab="rebirthsTab"
+        >
+          Rebirth (1 to 1M)
+        </button>
+        <button
+          id="ultraRebirthsButton"
+          class="navbar-button"
+          data-tab="ultraRebirthsTab"
+        >
+          Ultra Rebirth (1 to 1M)
+        </button>
+        <button id="runesButton" class="navbar-button" data-tab="runesTab">
+          Runes
+        </button>
+      </div>
+
+      <!-- Multipliers -->
+      <div id="multipliersTab" class="tab active">
+        <h2 class="tab-title">Multipliers</h2>
+        <div id="multipliers" class="scrollable">
+          <button
+            id="multiplier1"
+            class="multiplier"
+            data-cost="100"
+            data-multiplier="2"
+          >
+            Multiplier x2 (Cost: 100 points)
+          </button>
+          <button
+            id="multiplier2"
+            class="multiplier"
+            data-cost="500"
+            data-multiplier="5"
+          >
+            Multiplier x5 (Cost: 500 points)
+          </button>
+          <button
+            id="multiplier3"
+            class="multiplier"
+            data-cost="1000"
+            data-multiplier="10"
+          >
+            Multiplier x10 (Cost: 1,000 points)
+          </button>
+          <button
+            id="multiplier4"
+            class="multiplier"
+            data-cost="10000"
+            data-multiplier="50"
+          >
+            Multiplier x50 (Cost: 10,000 points)
+          </button>
+          <button
+            id="multiplier5"
+            class="multiplier"
+            data-cost="100000"
+            data-multiplier="100"
+          >
+            Multiplier x100 (Cost: 100,000 points)
+          </button>
+          <button
+            id="multiplier6"
+            class="multiplier"
+            data-cost="1000000"
+            data-multiplier="1000"
+          >
+            Multiplier x1000 (Cost: 1,000,000 points)
+          </button>
+        </div>
+      </div>
+
+      <!-- Rebirths -->
+      <div id="rebirthsTab" class="tab">
+        <h2 class="tab-title">Rebirth</h2>
+        <div id="rebirth" class="scrollable">
+          <button id="rebirthButton1" class="rebirth" data-cost="1000">
+            Rebirth (Cost: 1,000 points) - Multiplier x2
+          </button>
+          <button id="rebirthButton2" class="rebirth" data-cost="10000">
+            Rebirth (Cost: 10,000 points) - Multiplier x5
+          </button>
+          <button id="rebirthButton3" class="rebirth" data-cost="100000">
+            Rebirth (Cost: 100,000 points) - Multiplier x10
+          </button>
+          <button id="rebirthButton4" class="rebirth" data-cost="1000000">
+            Rebirth (Cost: 1,000,000 points) - Multiplier x20
+          </button>
+        </div>
+      </div>
+
+      <!-- Ultra Rebirths -->
+      <div id="ultraRebirthsTab" class="tab">
+        <h2 class="tab-title">Ultra Rebirth</h2>
+        <div id="ultraRebirth" class="scrollable">
+          <button
+            id="ultraRebirthButton1"
+            class="ultra-rebirth"
+            data-cost="10000"
+          >
+            Ultra Rebirth (Cost: 10,000 points) - Multiplier x10
+          </button>
+          <button
+            id="ultraRebirthButton2"
+            class="ultra-rebirth"
+            data-cost="100000"
+          >
+            Ultra Rebirth (Cost: 100,000 points) - Multiplier x50
+          </button>
+          <button
+            id="ultraRebirthButton3"
+            class="ultra-rebirth"
+            data-cost="1000000"
+          >
+            Ultra Rebirth (Cost: 1,000,000 points) - Multiplier x100
+          </button>
+        </div>
+      </div>
+
+      <!-- Runes -->
+      <div id="runesTab" class="tab">
+        <h2 class="tab-title">Runes</h2>
+        <p class="game-info">Rune Count: <span id="runeCount">0</span></p>
+        <p class="requirement">Requires: 10,000 points to draw a rune</p>
+        <div id="runes" class="scrollable">
+          <button id="drawRune" class="draw-rune">Draw a Rune</button>
+          <div id="runeInventory"></div>
+        </div>
+      </div>
+    </div>
+    <script src="script.js"></script>
+  </body>
+</html>
